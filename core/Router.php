@@ -3,12 +3,20 @@
 
 class Router {
     public function route($url) {
-        $urlParts = explode('/', $url);
-        $controllerName = ucfirst($urlParts[1]) . 'Controller';
-        $actionName = $urlParts[2];
-        $params = array_slice($urlParts, 3); // Extract parameters from the URL
+        $urlParts = explode('/', ltrim($url, '/'));
+        // Ignore the first element if it's an empty string or matches the subdirectory
+        if($urlParts[0] === '') {
+            array_shift($urlParts);
+        }
+        $controllerName = ucfirst($urlParts[0]) . 'Controller';
+        $actionName = $urlParts[1];
+        $params = array_slice($urlParts, 2); // Extract parameters from the URL
 
-        $controller = new $controllerName();
-        call_user_func_array([$controller, $actionName], $params); // Use call_user_func_array to invoke the function with a set of parameters defined in an array
+        if (class_exists($controllerName)) {
+            $controller = new $controllerName();
+            call_user_func_array([$controller, $actionName], $params); // Use call_user_func_array to invoke the function with a set of parameters defined in an array
+        } else {
+            throw new Exception("Controller $controllerName not found");
+        }
     }
 }
