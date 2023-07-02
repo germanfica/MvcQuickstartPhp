@@ -40,6 +40,32 @@ class ProductsController extends Controller {
 }'
                     ]
                 ],
+                'render function' => [
+                    'info' => 'La función render es una función privada en DefaultController que se utiliza para renderizar el contenido de la página.',
+                    'usage' => 'Esta función se invoca dentro del método index para generar el contenido HTML de la página. Puedes modificar esta función para cambiar la estructura y el contenido de tu página.',
+                    'example' => [
+                        'modifying' => 'Por ejemplo, si quieres cambiar el estilo de la página, podrías modificar la función render para cambiar el CSS de la página:',
+                        'controller_code' => '<?php
+// /src/controllers/DefaultController.php
+
+class DefaultController extends Controller {
+    public function index() {
+        $this->render();
+    }
+
+    private function render() {
+        // Aquí puedes modificar el contenido HTML y CSS de tu página
+        ?>
+
+        <!DOCTYPE html>
+        <html>
+        <!-- ... (Aquí sigue tu código) -->
+
+        <?php
+    }
+}'
+                    ]
+                ]
                 // Add more sections as needed
             ],
         ];

@@ -58,3 +58,35 @@ $router->route($_SERVER['REQUEST_URI']);
 ```
 
 And that's it.
+
+## Add render function
+
+The `render` function in `DefaultController.php` is a private function used to generate the HTML content of the application's main page. This function is invoked within the `index` method.
+
+### Usage
+
+This function generates a welcome message and documentation about how the application works. You can modify this function to change the content and the structure of your page.
+
+For example, you could modify this function to change the style of your page. To do this, simply change the HTML and CSS code within the `render` function.
+
+```php
+<?php
+// /src/controllers/DefaultController.php
+
+class DefaultController extends Controller {
+    public function index() {
+        $this->render();
+    }
+
+    private function render() {
+        // You can modify the HTML and CSS content of your page here
+        ?>
+
+        <!DOCTYPE html>
+        <html>
+        <!-- ... (Your code continues here) -->
+
+        <?php
+    }
+}
+```
