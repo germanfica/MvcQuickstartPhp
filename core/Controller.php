@@ -4,14 +4,14 @@
 class Controller {
     private $hasRendered = false;
 
-    protected function render($data = []) {
+    protected function render($view, $data = []) {
         // Check if we've already rendered
         if ($this->hasRendered) {
             throw new Exception("Cannot render more than once");
         }
 
         // Path to the view file
-        $viewPath = \dirname(__DIR__) . '/src/Views/' . str_replace('Controller', '', get_class($this)) . '.html.php';
+        $viewPath = \dirname(__DIR__) . "/src/Views/{$view}";
 
         // Check if the view file exists
         if (file_exists($viewPath)) {

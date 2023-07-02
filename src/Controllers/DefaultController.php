@@ -66,7 +66,7 @@ class DefaultController extends Controller {
             ],
         ];
 
-        $this->render(['welcomeMessage' => $welcomeMessage]);
+        $this->render('Default.html.php', ['welcomeMessage' => $welcomeMessage]);
     }
 }
 ?>
