@@ -4,12 +4,14 @@
 class Router {
     public function route($url) {
         $urlParts = explode('/', ltrim($url, '/'));
+
         // Ignore the first element if it's an empty string or matches the subdirectory
         if($urlParts[0] === '') {
             array_shift($urlParts);
         }
-        $controllerName = ucfirst($urlParts[0]) . 'Controller';
-        $actionName = $urlParts[1];
+        $controllerName = !empty($urlParts[0]) ? ucfirst($urlParts[0]) . 'Controller' : 'DefaultController';
+        $actionName = !empty($urlParts[1]) ? $urlParts[1] : 'index';
+
         $params = array_slice($urlParts, 2); // Extract parameters from the URL
 
         if (class_exists($controllerName)) {
