@@ -1,5 +1,6 @@
 <?php
 // /core/Controller.php
+namespace Core;
 
 class Controller {
     private $hasRendered = false;
@@ -7,7 +8,7 @@ class Controller {
     protected function render($view, $data = []) {
         // Check if we've already rendered
         if ($this->hasRendered) {
-            throw new Exception("Cannot render more than once");
+            throw new \Exception("Cannot render more than once");
         }
 
         // Path to the view file
@@ -21,7 +22,7 @@ class Controller {
             // Include the view file
             include($viewPath);
         } else {
-            throw new Exception("View file $viewPath does not exist");
+            throw new \Exception("View file $viewPath does not exist");
         }
 
         $this->hasRendered = true;

@@ -1,6 +1,10 @@
 <?php
 // /src/controllers/DefaultController.php
 
+namespace Src\Controllers;
+
+use Core\Controller;
+
 class DefaultController extends Controller {
     public function index() {
         $welcomeMessage = [

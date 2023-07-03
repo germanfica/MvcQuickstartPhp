@@ -1,6 +1,10 @@
 <?php
 // /src/controllers/UserController.php
 
+namespace Src\Controllers;
+
+use Core\Controller;
+
 class UserController extends Controller {
     public function index() {
         $this->render('user/index.html.php');
