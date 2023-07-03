@@ -10,64 +10,88 @@ class DefaultController extends Controller {
         $welcomeMessage = [
             'message' => 'Welcome to MvcQuickstartPhp application!',
             'documentation' => [
-                'defaultController' => [
-                    'info' => 'El DefaultController es el controlador que maneja la ruta por defecto ("/") de la aplicación. Cuando ningún controlador se especifica en la URL, se invoca el DefaultController.',
-                    'usage' => 'El DefaultController es comúnmente usado para servir la página de inicio de la aplicación o una página de bienvenida similar. Puedes personalizar el DefaultController para que se ajuste a las necesidades de tu aplicación.',
-                    'example' => [
-                        'modifying' => 'Por ejemplo, si quisieras hacer que la página de inicio muestre una lista de productos, podrías modificar el método index en DefaultController para que haga exactamente eso.',
-                        'controller_code' => '<?php
+                'DefaultController' => [
+                    'info' => 'The DefaultController is the controller that handles the default ("/") route of the application. When no controller is specified in the URL, the DefaultController is invoked.',
+                    'usage' => 'The DefaultController is commonly used to serve the homepage of the application or a similar welcome page. You can customize the DefaultController to fit your application\'s needs.',
+                    'examples' => [
+                        [
+                            'title' => 'example',
+                            'description' => 'For example, if you wanted to make the homepage display a list of products, you could modify the index method in DefaultController to do just that.',
+                            'code' => '<?php
 // /src/controllers/DefaultController.php
+
+namespace Src\Controllers;
+
+use Core\Controller;
 
 class DefaultController extends Controller {
     public function index() {
-        // Tu lógica para listar productos va aquí
+        // Your logic for listing products goes here
     }
 }'
+                        ]
                     ]
                 ],
-                'routes' => [
-                    'info' => 'Las rutas son manejadas por la clase Router. La URL se descompone en partes, y la primera parte se utiliza para determinar el controlador, la segunda parte para la acción, y cualquier parte adicional se pasa como parámetros a la acción.',
-                    'usage' => 'Para crear una nueva ruta, necesitas crear una nueva clase de controlador en /src/controllers, y agregar métodos para cada acción que quieras manejar. Asegúrate de que el nombre de la clase del controlador coincida con la primera parte de la URL que deseas manejar, y que el nombre del método coincida con la segunda parte de la URL.',
-                    'example' => [
-                        'modifying' => 'Por ejemplo, si quieres manejar la URL /products/list, podrías crear una clase de controlador llamada ProductsController con un método list:',
-                        'controller_code' => '<?php
+                'Routes' => [
+                    'info' => 'Routes are handled by the Router class. The URL is broken down into parts, with the first part being used to determine the controller, the second part the action, and any additional parts passed as parameters to the action.',
+                    'usage' => 'To create a new route, you need to create a new controller class in /src/controllers, and add methods for each action you want to handle. Make sure your controller class name matches the first part of the URL you want to handle, and the method name matches the second part of the URL.',
+                    'examples' => [
+                        [
+                            'title' => 'example',
+                            'description' => 'For example, if you want to handle the URL /products/list, you could create a controller class named ProductsController with a list method:',
+                            'code' => '<?php
 // /src/controllers/ProductsController.php
+
+namespace Src\Controllers;
+
+use Core\Controller;
 
 class ProductsController extends Controller {
     public function list() {
-        // Tu lógica para listar productos va aquí
+        // Your logic for listing products goes here
     }
 }'
+                        ]
                     ]
                 ],
-                'render function' => [
-                    'info' => 'La función render es una función privada en DefaultController que se utiliza para renderizar el contenido de la página.',
-                    'usage' => 'Esta función se invoca dentro del método index para generar el contenido HTML de la página. Puedes modificar esta función para cambiar la estructura y el contenido de tu página.',
-                    'example' => [
-                        'modifying' => 'Por ejemplo, si quieres cambiar el estilo de la página, podrías modificar la función render para cambiar el CSS de la página:',
-                        'controller_code' => '<?php
-// /src/controllers/DefaultController.php
+                'Render a view' => [
+                    'info' => 'The render() function is used to generate the HTML content for any page within your application. This function is invoked within any action that needs to display a view.',
+                    'usage' => 'This is a simplified way of using the render() function. The specific view that is being rendered is `example/add.html.php`. In your application, you can replace this with the path to the view you need to render. If you need to pass data to the view, you can do so by providing an associative array as the second argument to the render() function. This array should have keys corresponding to the variables you want to use in the view.',
+                    'examples' => [
+                        [
+                            'title' => 'Example of ExampleController.php',
+                            'description' => 'For example, in your `ExampleController.php` controller, you could send the $welcomeMessage variable to display the welcome message in `example/add.html.php`.',
+                            'code' => '<?php
+// /src/controllers/ExampleController.php
 
-class DefaultController extends Controller {
-    public function index() {
-        $this->render();
-    }
+namespace Src\Controllers;
 
-    private function render() {
-        // Aquí puedes modificar el contenido HTML y CSS de tu página
-        ?>
+use Core\Controller;
 
-        <!DOCTYPE html>
-        <html>
-        <!-- ... (Aquí sigue tu código) -->
-
-        <?php
+class ExampleController extends Controller {
+    public function add() {
+        $welcomeMessage = \'Welcome to my application\';
+        $this->render(\'example/add.html.php\', [\'welcomeMessage\' => $welcomeMessage]); // Render your add view with the welcomeMessage variable
     }
 }'
+                        ],
+                        [
+                            'title' => 'Example of add.html.php',
+                            'description' => 'For example, in your `example/add.html.php` view, you could use the $welcomeMessage variable to display the welcome message.',
+                            'code' => '<!DOCTYPE html>
+<html>
+<head>
+    <title> <?= $welcomeMessage ?> </title>
+<body>
+    <h1> <?= $welcomeMessage ?> </h1>
+</body>
+</html>
+',
+// Add more examples...
+                        ]
                     ]
                 ]
-                // Add more sections as needed
-            ],
+            ]
         ];
 
         $this->render('Default.html.php', ['welcomeMessage' => $welcomeMessage]);

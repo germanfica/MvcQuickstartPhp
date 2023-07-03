@@ -33,10 +33,12 @@
                     <h5 class="card-title"><?= ucfirst($key) ?></h5>
                     <p class="card-text"><?= $docSection['info'] ?></p>
                     <p class="card-text"><?= $docSection['usage'] ?></p>
-                    <?php if (isset($docSection['example'])): ?>
-                        <h6 class="card-subtitle mb-2 text-example card card-body">Example:</h6>
-                        <p class="card-text"><?= $docSection['example']['modifying'] ?></p>
-                        <pre class="bg-dark text-white p-2"><code><?= htmlspecialchars($docSection['example']['controller_code']) ?></code></pre>
+                    <?php if (isset($docSection['examples'])): ?>
+                        <?php foreach ($docSection['examples'] as $exampleKey => $exampleValue): ?>
+                            <h6 class="card-subtitle mb-2 text-example card card-body"><?= ucfirst($exampleValue['title']) ?>:</h6>
+                            <p class="card-text"><?= $exampleValue['description'] ?></p>
+                            <pre class="bg-dark text-white p-2"><code><?= htmlspecialchars($exampleValue['code']) ?></code></pre>
+                        <?php endforeach; ?>
                     <?php endif; ?>
                 </div>
             </div>
